@@ -1,14 +1,14 @@
 <!--
  * @Author: your name
- * @Date: 2021-04-13 23:13:16
- * @LastEditTime: 2021-04-13 23:15:44
- * @LastEditors: your name
+ * @Date: 2021-04-14 15:56:09
+ * @LastEditTime: 2021-04-14 16:00:32
+ * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
- * @FilePath: \gshop-server_finale:\有关JS、vue的练习\vue\11-element\frame\src\App.vue
+ * @FilePath: \gshop-server_finale:\有关JS、vue的练习\vue\11-element\frame\src\components\用户管理\userlist.vue
 -->
 <template>
     <div>
-<router-view></router-view>
+        删除
     </div>
 </template>
 
