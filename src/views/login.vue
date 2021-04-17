@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-04-13 23:13:16
- * @LastEditTime: 2021-04-17 15:12:47
+ * @LastEditTime: 2021-04-17 18:54:02
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \gshop-server_finale:\有关JS、vue的练习\vue\11-element\frame\src\views\Home.vue
@@ -102,7 +102,7 @@ export default {
              if(res.meta.status==200){
                this.token=res.data.token
                sessionStorage.setItem('token',this.token)
-               this.$router.replace('/home/userList')
+               this.$router.replace('/home')
              }
            }
             })

@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-04-13 23:13:16
- * @LastEditTime: 2021-04-17 16:41:14
+ * @LastEditTime: 2021-04-17 19:37:01
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \gshop-server_finale:\有关JS、vue的练习\vue\11-element\frame\src\views\Home.vue
@@ -33,13 +33,13 @@
        :collapse-transition='false'
       >
       <div class="btn" @click="iscoll">|||</div>
-      <el-submenu :index="item.id"  v-for="item in list" :key="item.id" 
+      <el-submenu :index="String(index)"  v-for="(item,index) in list" :key="index" 
        >
         <template slot="title">
           <i class="el-icon-location"></i>
           <span>{{item.authName}}</span>
         </template>
-          <el-menu-item :index="it.id" v-for="it in item.children" :key="it.id"
+          <el-menu-item :index="String(index)" v-for="(it,index) in item.children" :key="index"
             :route="{path:'/home/'+it.path} "
 
           >
@@ -92,14 +92,14 @@ export default {
     },
     mounted(){
         http({
-            url:'/api/private/v1/rights/:type',   
+            url:'/api/private/v1/menus',   
             method:'get',
             params:{
                 url:'tree'
             }
         }).then((res)=>{
             console.log(res)
-            this.list=res.list
+            this.list=res.data
         })
     },
     components: {

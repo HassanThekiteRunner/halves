@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-04-13 23:13:16
- * @LastEditTime: 2021-04-14 18:17:30
+ * @LastEditTime: 2021-04-17 19:34:54
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \gshop-server_finale:\有关JS、vue的练习\vue\11-element\frame\src\router\index.js
@@ -31,22 +31,52 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/home.vue'),
     children:[
       {
-        path: 'userList',
-        name: 'userList',
+        path: 'users',
+        name: 'users',
     
       component: () => import(/* webpackChunkName: "about" */ '../components/用户管理/userlist.vue'),
       },
       {
-        path: 'addUser',
-        name: 'addUser',
+        path: 'roles',
+        name: 'roles',
     
-      component: () => import(/* webpackChunkName: "about" */ '../components/用户管理/addUser.vue'),
+      component: () => import(/* webpackChunkName: "about" */ '../components/权限管理/jiao.vue'),
       },
       {
-        path: 'removeUser',
-        name: 'removeUser',
+        path: 'rights',
+        name: 'rights',
     
-      component: () => import(/* webpackChunkName: "about" */ '../components/用户管理/removeUser.vue'),
+      component: () => import(/* webpackChunkName: "about" */ '../components/权限管理/quan.vue'),
+      },
+      {
+        path: 'goods',
+        name: 'goods',
+    
+      component: () => import(/* webpackChunkName: "about" */ '../components/商品管理/goods.vue'),
+      },
+      {
+        path: 'params',
+        name: 'params',
+    
+      component: () => import(/* webpackChunkName: "about" */ '../components/商品管理/params.vue'),
+      },
+      {
+        path: 'categories',
+        name: 'categories',
+    
+      component: () => import(/* webpackChunkName: "about" */ '../components/商品管理/categories.vue'),
+      },
+      {
+        path: 'reports',
+        name: 'reports',
+    
+      component: () => import(/* webpackChunkName: "about" */ '../components/数据统计/reports.vue'),
+      },
+      {
+        path: 'orders',
+        name: 'orders',
+    
+      component: () => import(/* webpackChunkName: "about" */ '../components/订单管理/orders.vue'),
       },
     ]
   }
