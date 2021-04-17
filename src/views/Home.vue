@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-04-13 23:13:16
- * @LastEditTime: 2021-04-17 15:14:06
+ * @LastEditTime: 2021-04-17 16:41:14
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \gshop-server_finale:\有关JS、vue的练习\vue\11-element\frame\src\views\Home.vue
@@ -92,14 +92,11 @@ export default {
     },
     mounted(){
         http({
-            url:'/api/private/v1/users',
+            url:'/api/private/v1/rights/:type',   
             method:'get',
             params:{
-                pagenum:1,
-                pagesize:4
+                url:'tree'
             }
-            
-            
         }).then((res)=>{
             console.log(res)
             this.list=res.list
