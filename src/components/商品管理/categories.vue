@@ -6,6 +6,7 @@
  * @Description: In User Settings Edit
  * @FilePath: \gshop-server_finale:\有关JS、vue的练习\vue全部课程\16-后台管理系统\backstage\src\components\商品管理\categories.vue
 -->
+//模板
 <template>
     <div>
         商品分类
