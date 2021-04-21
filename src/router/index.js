@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-04-13 23:13:16
- * @LastEditTime: 2021-04-17 19:34:54
+ * @LastEditTime: 2021-04-17 23:36:25
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \gshop-server_finale:\有关JS、vue的练习\vue\11-element\frame\src\router\index.js
@@ -24,12 +24,20 @@ const routes = [
 
   component: () => import(/* webpackChunkName: "about" */ '../views/login.vue'),
   },
+  
   {
     path: '/Home',
     name: 'Home',
-    
-    component: () => import(/* webpackChunkName: "about" */ '../views/home.vue'),
+    redirect:'/Home/Huanying',
+    component: () => import(/* webpackChunkName: "about" */ '../views/Home.vue'),
     children:[
+      {
+        path: 'Huanying',
+        name: 'Huanying',
+    
+      component: () => import(/* webpackChunkName: "about" */ '../views/huan.vue'),
+      },
+      
       {
         path: 'users',
         name: 'users',

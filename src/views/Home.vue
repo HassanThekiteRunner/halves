@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-04-13 23:13:16
- * @LastEditTime: 2021-04-17 19:37:01
+ * @LastEditTime: 2021-04-20 15:44:20
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \gshop-server_finale:\有关JS、vue的练习\vue\11-element\frame\src\views\Home.vue
@@ -22,7 +22,7 @@
       <!-- 左边 -->
     <el-aside :width="iscolls?'64.5px':'200px' ">
         <el-menu
-      default-active="4"
+      :default-active="dongtai"
       class="el-menu-vertical-demo"
       background-color="#545c64"
       text-color="#fff"
@@ -33,15 +33,15 @@
        :collapse-transition='false'
       >
       <div class="btn" @click="iscoll">|||</div>
-      <el-submenu :index="String(index)"  v-for="(item,index) in list" :key="index" 
+      <el-submenu :index="String(index)"  v-for="(item,index) in list" :key="item.id" 
        >
         <template slot="title">
-          <i class="el-icon-location"></i>
+          <i :class="iconlist[item.id]"></i>
           <span>{{item.authName}}</span>
         </template>
-          <el-menu-item :index="String(index)" v-for="(it,index) in item.children" :key="index"
-            :route="{path:'/home/'+it.path} "
-
+          <el-menu-item :index="'/home/'+it.path" v-for="(it,index) in item.children" :key="index"
+           
+            @click="qie('/home/'+it.path)"
           >
               <i class="el-icon-menu"></i>
               {{it.authName}}
@@ -77,9 +77,22 @@ export default {
             list:[],
             isnan:true,
             isda:true,
-            iscolls:false
+            iscolls:false,
+            dongtai:'',
+            iconlist:{
+                "125":"iconfont iconteam",
+                "103":"iconfont iconqukuai",
+                "101":"iconfont iconshangpin-xianxing",
+                "102":"iconfont icondingdan",
+                "145":"iconfont iconshujutongji1",
+               
+            }
         
         };
+    },
+
+    created(){
+        this.dongtai=sessionStorage.getItem('dongtai')
     },
     methods: {
         tuichu(){
@@ -88,17 +101,20 @@ export default {
         },
         iscoll(){
             this.iscolls=!this.iscolls
+        },
+        qie(dongtai){
+            sessionStorage.setItem('dongtai',dongtai)
+            this.dongtai=dongtai
         }
     },
     mounted(){
         http({
-            url:'/api/private/v1/menus',   
+            url:'/menus',   
             method:'get',
             params:{
                 url:'tree'
             }
         }).then((res)=>{
-            console.log(res)
             this.list=res.data
         })
     },
@@ -132,6 +148,12 @@ export default {
         background: rgb(84, 92, 100);
         .el-menu{
             border: none;
+            .el-submenu{
+                i{
+                    color: #fff;
+                    margin-right:15px;
+                }
+            }
         }
         .btn{
             color: #fff;
@@ -143,7 +165,7 @@ export default {
         }
     }
     .el-main{
-        background: #ccc;
+        background: #fcfcfc;
     }
 }
 }

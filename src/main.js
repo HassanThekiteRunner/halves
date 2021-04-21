@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-04-13 23:13:16
- * @LastEditTime: 2021-04-16 19:11:51
+ * @LastEditTime: 2021-04-17 23:06:00
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \gshop-server_finale:\有关JS、vue的练习\vue\11-element\frame\src\main.js
@@ -10,6 +10,8 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
+
+import './assets/icon-font/iconfont.css'
 
 //引入element Ui组件库
 import ElementUI from 'element-ui';

@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-04-13 23:13:16
- * @LastEditTime: 2021-04-17 18:54:02
+ * @LastEditTime: 2021-04-20 15:43:37
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \gshop-server_finale:\有关JS、vue的练习\vue\11-element\frame\src\views\Home.vue
@@ -83,26 +83,22 @@ export default {
       this.$refs[formName].validate((valid) => {
         if (valid) {
           http({
-            url: "/api/private/v1/login",
+            url: "/login",
             method: "post",
             data: {
               username: this.ruleForm.name,
               password: this.ruleForm.pass,
             },
           }).then((res) => {
-            console.log(res);
-            // let mess=null,type=null
-            
             this.$message({
               message:res.meta.msg,
               type:'success',
                duration:2000,
               onClose:()=>{
-                console.log('111')
              if(res.meta.status==200){
                this.token=res.data.token
                sessionStorage.setItem('token',this.token)
-               this.$router.replace('/home')
+               this.$router.replace('/Home')
              }
            }
             })

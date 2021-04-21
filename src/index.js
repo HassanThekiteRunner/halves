@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-04-11 17:10:11
- * @LastEditTime: 2021-04-14 18:38:11
+ * @LastEditTime: 2021-04-17 20:45:49
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \gshop-server_finale:\有关JS、vue的练习\vue\10-豆瓣\halves\src\assets\js\index.js
@@ -20,7 +20,7 @@ export default function(config){
 
       instance.interceptors.request.use(function (config) {
         // 在发送请求之前做些什么
-        console.log(config)
+        // console.log(config)
        config.headers.Authorization=sessionStorage.getItem('token')
         // if(config.url!='/'){
         //   let token=sessionStorage.getItem('token')

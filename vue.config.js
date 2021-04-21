@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-04-11 17:09:38
- * @LastEditTime: 2021-04-13 18:30:57
+ * @LastEditTime: 2021-04-21 10:25:25
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \gshop-server_finale:\有关JS、vue的练习\vue\10-豆瓣\halves\vue.config.js
@@ -11,7 +11,7 @@ module.exports = {
     devServer: {
       proxy: {
         '/api': {
-          target: 'http://127.0.0.1:3000',
+          target: 'http://127.0.0.1:3000/api/private/v1',
           pathRewrite: { '^/api': '' },
           // changeOrigin: true,
         },

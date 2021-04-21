@@ -1,0 +1,86 @@
+{
+  "id": "2220728",
+  "name": "后台管理",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon",
+  "description": "后台管理",
+  "glyphs": [
+    {
+      "icon_id": "1727271",
+      "name": "06商品-线性",
+      "font_class": "shangpin-xianxing",
+      "unicode": "e889",
+      "unicode_decimal": 59529
+    },
+    {
+      "icon_id": "4251712",
+      "name": "订单",
+      "font_class": "dingdan",
+      "unicode": "e63a",
+      "unicode_decimal": 58938
+    },
+    {
+      "icon_id": "14154377",
+      "name": "区块",
+      "font_class": "qukuai",
+      "unicode": "e74a",
+      "unicode_decimal": 59210
+    },
+    {
+      "icon_id": "16872876",
+      "name": "数据统计",
+      "font_class": "shujutongji1",
+      "unicode": "e606",
+      "unicode_decimal": 58886
+    },
+    {
+      "icon_id": "19989460",
+      "name": "user-group",
+      "font_class": "user-group",
+      "unicode": "ea34",
+      "unicode_decimal": 59956
+    },
+    {
+      "icon_id": "791903",
+      "name": "后台管理系统",
+      "font_class": "xitongguanli1",
+      "unicode": "e62f",
+      "unicode_decimal": 58927
+    },
+    {
+      "icon_id": "3868266",
+      "name": "功能定义",
+      "font_class": "gongnengdingyi",
+      "unicode": "eb62",
+      "unicode_decimal": 60258
+    },
+    {
+      "icon_id": "9155447",
+      "name": "用户管理",
+      "font_class": "team",
+      "unicode": "e600",
+      "unicode_decimal": 58880
+    },
+    {
+      "icon_id": "14005951",
+      "name": "数据统计",
+      "font_class": "shujutongji",
+      "unicode": "e609",
+      "unicode_decimal": 58889
+    },
+    {
+      "icon_id": "14597481",
+      "name": "商品管理",
+      "font_class": "shangpingouwudai",
+      "unicode": "e601",
+      "unicode_decimal": 58881
+    },
+    {
+      "icon_id": "16172022",
+      "name": "报 表 管 理",
+      "font_class": "baobiaoguanli",
+      "unicode": "e602",
+      "unicode_decimal": 58882
+    }
+  ]
+}
