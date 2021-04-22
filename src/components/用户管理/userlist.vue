@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-04-14 15:56:09
- * @LastEditTime: 2021-04-21 19:14:51
+ * @LastEditTime: 2021-04-22 19:17:55
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \gshop-server_finale:\有关JS、vue的练习\vue\11-element\frame\src\components\用户管理\userlist.vue
@@ -19,23 +19,21 @@
 
     <!-- 卡片 -->
     <el-card class="box-card">
-      <div slot="header" class="clearfix">
-        <!-- 复合型输入框 -->
-        <div style="margin-top: 15px">
-          <el-input
-            placeholder="请输入内容"
-            v-model="userinfo.query"
-            class="input-with-select"
-            clearable
-            @clear="getuser"
-          >
-            <el-button
-              slot="append"
-              icon="el-icon-search"
-              @click="getuser"
-            ></el-button>
-          </el-input>
-        </div>
+      <!-- 复合型输入框 -->
+      <div class="disp" style="margin-top: 15px">
+        <el-input
+          placeholder="请输入内容"
+          v-model="userinfo.query"
+          class="input-with-select"
+          clearable
+          @clear="getuser"
+        >
+          <el-button
+            slot="append"
+            icon="el-icon-search"
+            @click="getuser"
+          ></el-button>
+        </el-input>
         <!-- 点击按钮 -->
         <el-button class="zhu" type="primary" @click="dialogVisible = true"
           >添加用户</el-button
@@ -52,16 +50,15 @@
         </el-table-column>
         <el-table-column prop="role_name" label="角色" width="150">
         </el-table-column>
-        <el-table-column label="状态" width="100">
+        <el-table-column label="状态" width="100" prop='mg_state'>
           <template slot-scope="scope">
             <el-switch
-              v-model="scope.row.mg_state"
-              @change="userStatechanged(scope.row)"
-            >
+              v-model="scope.row.mg_state" @change="userStatechanged(scope.row.id,
+              scope.row.mg_state)">
             </el-switch>
           </template>
         </el-table-column>
-        <el-table-column prop="address" label="操作" width="210%">
+        <el-table-column label="操作" width="210%">
           <template slot-scope="scope">
             <!-- 修改 -->
             <el-button
@@ -78,19 +75,8 @@
               icon="el-icon-delete"
               size="mini"
               slot="reference"
-              @click="visible = true"
+              @click="remove(scope.row.id)"
             ></el-button>
-            <!-- 删除 -->
-            <el-dialog title="提示" :visible.sync="visible" width="30%">
-              <i class="el-icon-warning-outline"></i>
-              <span>此操作将永久删除该用户，是否继续？</span>
-              <span slot="footer" class="dialog-footer">
-                <el-button @click="visible = false">取 消</el-button>
-                <el-button type="primary" @click="remove(scope.row.id)"
-                  >确 定</el-button
-                >
-              </span>
-            </el-dialog>
             <!-- 移入有文字提示 -->
             <el-tooltip
               class="item"
@@ -166,7 +152,11 @@
           class="demo-ruleForm"
         >
           <el-form-item label="用户名" prop="name">
-            <el-input v-model="ruleForm1.username" clearable disabled></el-input>
+            <el-input
+              v-model="ruleForm1.username"
+              clearable
+              disabled
+            ></el-input>
           </el-form-item>
           <el-form-item label="邮箱" prop="email">
             <el-input v-model="ruleForm1.email"></el-input>
@@ -215,7 +205,7 @@ export default {
   props: {},
   data() {
     var checkname = (rule, value, callback) => {
-      const search = /^(\w){3,6}$/;
+      const search = /^(\w){3,10}$/;
       if (search.test(value)) {
         return callback();
       }
@@ -257,6 +247,7 @@ export default {
       xiugaible: false,
       /* 分页器 */
       // currentPage4: 4,
+      queryinfo:'',
       userinfo: {
         query: "",
         pagenum: 1,
@@ -321,15 +312,17 @@ export default {
       this.userinfo.pagenum = val;
       this.getuser();
     },
-    userStatechanged(queryinfo) {
-      console.log(queryinfo);
-      http({
-        url: `/users/${queryinfo.id}/state/${queryinfo.mg_state}}`,
+
+    
+    async userStatechanged(id, newState) {
+      console.log(id, newState);
+     await  http({
+        url: `/users/${id}/state/${newState}}`,
         method: "put",
       }).then((res) => {
         console.log(res);
         if (res.meta.status !== 200) {
-          queryinfo.mg_state = !queryinfo.mg_state;
+          newState=!newState
           return this.$message.error("更新状态失败！");
         }
         this.$message.success("更新状态成功！");
@@ -352,31 +345,51 @@ export default {
         if (res.meta.status !== 201) {
           return this.$message.error("添加失败！");
         }
-        return this.$message.success("添加成功！");
-      });
-      (this.ruleForm.name = ""),
+        this.$message.success("添加成功！");
+         (this.ruleForm.name = ""),
         (this.ruleForm.pass = ""),
         (this.ruleForm.email = ""),
         (this.ruleForm.phone = ""),
         (this.dialogVisible = false);
+        this.getuser()
+      });
+     
     },
 
     /* 删除 */
 
-    remove(id) {
+     async remove(id) {
       console.log(id);
+     const confirmResult=await  this.$confirm(
+      "此操作将永久删除该文件, 是否继续?",
+      "提示",
+       {
+          confirmButtonText: "确定",
+          cancelButtonText: "取消",
+          type: "warning",
+        }
+    ).catch((err)=>{
+      return err
+    })
+
+    console.log(confirmResult)
+    if(confirmResult!=='confirm'){
+      return this.$message.info('已经取消删除！')
+    }
+
       http({
-        url: `/users/${id}`,
+        url: "/users/"+id,
         method: "delete",
       }).then((res) => {
         console.log(res);
         if (res.meta.status !== 200) {
           return this.$message.error("删除失败！");
         }
-        return this.$message.success("删除成功！");
+         this.$message.success("删除成功！");
+        this.getuser();
+        this.visible = false;
       });
-      this.getuser();
-      this.visible = false;
+      
     },
 
     /* 修改前查询 */
@@ -436,14 +449,13 @@ export default {
         },
       }).then((res) => {
         console.log(res);
-        if(res.meta.status!==200){
-          return  this.$message.error('分配角色失败！')
+        if (res.meta.status !== 200) {
+          return this.$message.error("分配角色失败！");
         }
-        this.$message.success('分配角色成功！')
+        this.$message.success("分配角色成功！");
         this.dialogfenpei = false;
         this.getuser();
-        this.value1='',
-        this.she={}
+        (this.value1 = ""), (this.she = {});
       });
     },
 
@@ -453,6 +465,7 @@ export default {
         method: "get",
         params: this.userinfo,
       }).then((res) => {
+       
         this.list = res.data.users;
         this.total = res.data.total;
       });
@@ -484,18 +497,13 @@ export default {
     margin-right: 10px;
   }
   margin-top: 20px;
-  .clearfix {
-    display: flex;
-    height: 55px;
-
+  .disp {
     .el-input {
-      margin-top: -20px;
+      margin-right: 20px;
+      width: 300px;
     }
-    .zhu {
-      height: 40px;
-      margin-top: 7px;
-      margin-left: 20px;
-    }
+    display: flex;
+    margin-bottom: 35px;
   }
   .block {
     margin-top: 20px;
